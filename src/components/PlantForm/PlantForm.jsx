@@ -5,7 +5,7 @@ const PlantForm = () => {
     const dispatch = useDispatch();
     
     //Initial state is an OBJECT, with keys id and name
-    let [newPlant, setPlant] = useState({id: 4, name: ''});
+    let [newPlant, setPlant] = useState('');
 
     const handleNameChange = (event) => {
         //Similar to in redux -- we dont want to get rid of the id field when we update name
