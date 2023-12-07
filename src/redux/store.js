@@ -38,13 +38,13 @@ function* postPlants(action) {
       method: 'POST',
       url: '/api/plants',
       data: {
-        name: action.payload,
-        kingdom: action.payload,
-        clade: action.payload,
-        order: action.payload,
-        family: action.payload,
-        subfamily: action.payload,
-        genus: action.payload
+        name: action.payload.name,
+        kingdom: action.payload.kingdom,
+        clade: action.payload.clade,
+        order: action.payload.order,
+        family: action.payload.family,
+        subfamily: action.payload.subfamily,
+        genus: action.payload.genus
       }
     })
     yield put({

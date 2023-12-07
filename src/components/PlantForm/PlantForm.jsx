@@ -13,11 +13,6 @@ const PlantForm = () => {
     let [newSubfamily, setSubfamily] = useState('');
     let [newGenus, setGenus] = useState('');
 
-    const handleNameChange = (event) => {
-        //Similar to in redux -- we dont want to get rid of the id field when we update name
-        setPlant({ ...newPlant, name: event.target.value })
-    }
-
     const addNewPlant = event => {
         event.preventDefault();
         dispatch({
@@ -32,6 +27,8 @@ const PlantForm = () => {
                 genus: newGenus
             }
         })
+
+
     }
     return (
         <div>

@@ -27,6 +27,7 @@ function PlantList() {
                     <div key={plant.id}>
                         <ul>
                             {plant.name}
+
                         </ul>
                     </div>
                 )
