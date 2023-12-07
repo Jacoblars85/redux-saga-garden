@@ -11,7 +11,7 @@ import { takeLatest, put } from 'redux-saga/effects';
 const plantList = (state = [], action) => {
   switch (action.type) {
     case 'GET_PLANTS':
-      return action.payload 
+      return action.payload
     default:
       return state;
   }
@@ -19,16 +19,39 @@ const plantList = (state = [], action) => {
 
 function* getPlants() {
   try {
-      const response = yield axios({
-          method: 'GET',
-          url: '/api/plants'
-      })
-      yield put({
-          type: 'GET_PLANTS',
-          payload: response.data
-      })
+    const response = yield axios({
+      method: 'GET',
+      url: '/api/plants'
+    })
+    yield put({
+      type: 'GET_PLANTS',
+      payload: response.data
+    })
   } catch (error) {
-      console.log('Unable to get plants from server', error);
+    console.log('Unable to get plants from server', error);
+  }
+}
+
+function* postPlants(action) {
+  try {
+    const response = yield axios({
+      method: 'POST',
+      url: '/api/plants',
+      data: {
+        name: action.payload,
+        kingdom: action.payload,
+        clade: action.payload,
+        order: action.payload,
+        family: action.payload,
+        subfamily: action.payload,
+        genus: action.payload
+      }
+    })
+    yield put({
+      type: 'SAGA_GET_PLANTS',
+    })
+  } catch (error) {
+    console.log('Unable to save plants to server', error);
   }
 }
 
@@ -37,7 +60,7 @@ function* getPlants() {
 
 function* rootSaga() {
   yield takeLatest('SAGA_GET_PLANTS', getPlants)
-  
+  yield takeLatest('SAGA_POST_PLANTS', postPlants)
 }
 
 const sagaMiddleware = createSagaMiddleware();
@@ -47,8 +70,8 @@ const sagaMiddleware = createSagaMiddleware();
 // configured to utilize redux-saga OR
 // redux logger!
 const store = createStore(
-  combineReducers({ 
-    plantList 
+  combineReducers({
+    plantList
   }),
 
   applyMiddleware(sagaMiddleware, logger),
