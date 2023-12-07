@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import PlantItem from '../PlantItem/PlantItem';
 
 
 function PlantList() {
@@ -15,7 +16,6 @@ function PlantList() {
         dispatch({
             type: 'SAGA_GET_PLANTS'
         })
-
     }
 
     return (
@@ -25,10 +25,7 @@ function PlantList() {
             {plantList.map((plant) => {
                 return (
                     <div key={plant.id}>
-                        <ul>
-                            {plant.name}
-
-                        </ul>
+                       <PlantItem plant={plant}/>
                     </div>
                 )
             })

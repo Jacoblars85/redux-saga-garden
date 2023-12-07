@@ -55,12 +55,28 @@ function* postPlants(action) {
   }
 }
 
+function* deletePlants(action) {
+  try {
+      const response = yield axios({
+          method: 'DELETE',
+          url: `/api/plants/${action.payload}`
+
+      })
+      yield put({
+          type: 'SAGA_GET_PLANTS',
+      })
+  } catch (error) {
+      console.log('Unable to deleting plant from server', error);
+  }
+}
+
 
 
 
 function* rootSaga() {
   yield takeLatest('SAGA_GET_PLANTS', getPlants)
   yield takeLatest('SAGA_POST_PLANTS', postPlants)
+  yield takeLatest('SAGA_DELETE_PLANT', deletePlants)
 }
 
 const sagaMiddleware = createSagaMiddleware();
